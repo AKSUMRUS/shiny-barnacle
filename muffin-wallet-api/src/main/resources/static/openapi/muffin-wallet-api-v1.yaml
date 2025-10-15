@@ -6,7 +6,7 @@ info:
   version: 1.0.0
 
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8081
     description: localhost
 
 tags:
@@ -111,6 +111,9 @@ components:
         amount:
           type: number
           format: decimal
+        currency:
+          type: number
+          format: decimal
         created_at:
           type: string
           format: date-time        
@@ -124,6 +127,8 @@ components:
           format: decimal
     CreateMuffinWallet:
       properties:
+        type:
+          type: string
         owner_name:
           type: string
     MuffinWallet:
@@ -136,6 +141,8 @@ components:
         balance:
           type: number
           format: decimal
+        type:
+          type: string
         created_at:
           type: string
           format: date-time
