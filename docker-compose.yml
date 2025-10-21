@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: muffin-postgres
+    env_file:
+      - .env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./local-env/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - muffin-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U muffin-wallet"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aksumshevkevich/muffin-wallet:latest
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    networks:
+      - muffin-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+
+networks:
+  muffin-network:
+    driver: bridge
+
+volumes:
+  db-data:
