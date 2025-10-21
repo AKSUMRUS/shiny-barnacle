@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: muffin-wallet-pod
+  namespace: aksum
+  labels:
+    app: muffin-wallet
+spec:
+  containers:
+    - name: muffin-wallet
+      image: aksumshevkevich/muffin-wallet:lates
+      imagePullPolice: IfNotPresent
+      ports:
+        - containerPort: 8080
+      envFrom:
+        - configMapRef:
+          name: muffin-wallet-config
+      env:
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_USER
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD

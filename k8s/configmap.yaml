@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: muffin-wallet-config
+  namespace: aksum
+data:
+  APP_NAME: "muffin-wallet"
+  LOG_LEVEL: "INFO"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-service:5432/muffin_wallet"
+  application.yaml: |
+    springdoc:
+      swagger-ui:
+        user-root-path: true
+        urls:
+          - name: muffin-wallet-api-v1
+            url: /openapi/muffin-wallet-api-v1.yaml
