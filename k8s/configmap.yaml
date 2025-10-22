@@ -5,7 +5,6 @@ metadata:
   namespace: aksum
 data:
   APP_NAME: "muffin-wallet"
-  LOG_LEVEL: "INFO"
   SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-service:5432/muffin_wallet"
   application.yaml: |
     springdoc:

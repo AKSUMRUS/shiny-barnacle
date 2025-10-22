@@ -5,6 +5,7 @@ metadata:
   namespace: aksum
 spec:
   replicas: 3
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: muffin-wallet
